@@ -10,7 +10,10 @@ Spring Framework (Spring Boot, Spring Data and Spring Security) and Hibernate OR
 will be added soon).
 
 ### Instructions
+
+#### • With Docker
 To run project locally you need docker installed on your pc with docker-compose module and sourcecode.
+You can install it [here](https://docs.docker.com/engine/install/).
 <br> Go to root dir with ```compose.yaml``` file and run command:
 ```bash
 docker-compose up
@@ -22,6 +25,24 @@ run it with ```--build``` flag like this:
 docker-compose up --build
 ```
 In this way docker will rebuild container that includes application even you've built it earlier.
+
+#### • Without Docker (Required Gradle installed):
+
+First, if you don't have, you should install Gradle: building system for java project, and JRE 21.
+Install JRE (or JDK, if you want to modify code) [here](https://www.oracle.com/ua/java/technologies/downloads/). 
+Then install [Gradle](https://docs.gradle.org/current/userguide/installation.html#gs:installation).
+After installation navigate to project root directory, and run project with:
+```bash
+./gradlew bootRun
+```
+
+#### • Check work
+Project starts on localhost on port 8080, so all requests should be sent on 
+```http://localhost:8080```
+To check that project working send get request on ```http://localhost:8080/healthcheck```
+
+Also, project is already deployed on Render hosting. Check workability here:<br>
+https://backend-labs-project.onrender.com/healthcheck
 <hr>
 
 ### Conclusion
