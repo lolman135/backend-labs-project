@@ -15,6 +15,6 @@ class UpdateUserByIdUseCase(private val userRepository: UserRepository) : UseCas
         input.password?.let { updatedUser = updatedUser.changePassword(it) }
         input.roles?.forEach { updatedUser = updatedUser.addRole(it) }
 
-        return updatedUser
+        return userRepository.save(updatedUser)
     }
 }

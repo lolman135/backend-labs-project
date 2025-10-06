@@ -1,8 +1,16 @@
 services:
-  lab_api:
+  healthcheck_service:
     build:
       context: HealthcheckService/.
-    container_name: labs_api
+    container_name: healthcheck-service
     ports:
       - '8081:8081'
+    restart: always
+
+  user_service:
+    build:
+      context: UserService/.
+    container_name: user-service
+    ports:
+      - "8082:8082"
     restart: always
