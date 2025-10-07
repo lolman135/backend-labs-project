@@ -1,7 +1,7 @@
-*.kts
-gradlew
-*.bat
-.gradle
-.idea
-build
-gradle
+/*.kts
+/gradlew
+/*.bat
+/.gradle
+/.idea
+/build
+/gradle
