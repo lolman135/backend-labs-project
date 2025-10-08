@@ -1,7 +1,7 @@
 package labs.expenseservice.infrastructure.communication
 
-import labs.expenseservice.application.exception.EntityNotFoundException
-import labs.expenseservice.application.useCase.record.UserProvider
+import labs.expenseservice.application.useCase.UserProvider
+import labs.expenseservice.application.useCase.userExternal.UserExternalInfo
 import org.springframework.stereotype.Component
 import java.util.UUID
 
@@ -10,12 +10,16 @@ class UserProviderImpl(
     private val userRestClient: UserRestClient
 ) : UserProvider {
 
-    override fun userExistsById(userId: UUID): Boolean {
+    override fun userExistsById(userId: UUID) =
         try {
             userRestClient.getUserById(userId)
-            return true
-        } catch (ex: IllegalStateException){
-            return false
+            true
+        } catch (_: IllegalStateException){
+            false
         }
+
+    override fun getUserInfoById(userId: UUID): UserExternalInfo {
+        val externalUser = userRestClient.getUserById(userId)
+        return UserExternalInfo(externalUser.id, externalUser.name)
     }
 }

@@ -3,6 +3,7 @@ package labs.expenseservice.application.useCase.record
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import labs.expenseservice.application.exception.EntityNotFoundException
 import labs.expenseservice.application.useCase.UseCase
+import labs.expenseservice.application.useCase.UserProvider
 import labs.expenseservice.application.useCase.category.CreateCategoryUseCase
 import labs.expenseservice.domain.category.CategoryRepository
 import labs.expenseservice.domain.record.Record

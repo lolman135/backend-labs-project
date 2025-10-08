@@ -9,7 +9,8 @@ import labs.expenseservice.application.useCase.record.CreateRecordUseCase
 import labs.expenseservice.application.useCase.record.DeleteRecordByIdUseCase
 import labs.expenseservice.application.useCase.record.GetAllRecordsUseCase
 import labs.expenseservice.application.useCase.record.GetRecordByIdUseCase
-import labs.expenseservice.application.useCase.record.UserProvider
+import labs.expenseservice.application.useCase.UserProvider
+import labs.expenseservice.application.useCase.userExternal.GetUserInfoUseCase
 import labs.expenseservice.domain.category.CategoryRepository
 import labs.expenseservice.domain.record.RecordRepository
 import labs.expenseservice.infrastructure.communication.UserProviderImpl
@@ -66,5 +67,8 @@ class AppConfig {
 
     @Bean
     fun deleteRecordById(recordRepository: RecordRepository) = DeleteRecordByIdUseCase(recordRepository)
+
+    @Bean
+    fun getUserInfoUseCase(userProvider: UserProvider) = GetUserInfoUseCase(userProvider)
 
 }
