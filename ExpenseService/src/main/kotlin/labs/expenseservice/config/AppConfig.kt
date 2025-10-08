@@ -7,14 +7,11 @@ import labs.expenseservice.application.useCase.category.GetCategoryByIdUseCase
 import labs.expenseservice.application.useCase.category.UpdateCategoryByIdUseCase
 import labs.expenseservice.application.useCase.record.CreateRecordUseCase
 import labs.expenseservice.application.useCase.record.DeleteRecordByIdUseCase
-import labs.expenseservice.application.useCase.record.GetAllRecordsUseCase
 import labs.expenseservice.application.useCase.record.GetRecordByIdUseCase
 import labs.expenseservice.application.useCase.UserProvider
 import labs.expenseservice.application.useCase.userExternal.GetUserInfoUseCase
 import labs.expenseservice.domain.category.CategoryRepository
 import labs.expenseservice.domain.record.RecordRepository
-import labs.expenseservice.infrastructure.communication.UserProviderImpl
-import labs.expenseservice.infrastructure.communication.UserRestClient
 import labs.expenseservice.persistence.repository.CategoryMockRepository
 import labs.expenseservice.persistence.repository.RecordMockRepository
 import org.springframework.context.annotation.Bean
@@ -60,13 +57,13 @@ class AppConfig {
     ) = CreateRecordUseCase(recordRepository, categoryRepository, userProvider)
 
     @Bean
-    fun getAllRecordsUseCase(recordRepository: RecordRepository) = GetAllRecordsUseCase(recordRepository)
-
-    @Bean
     fun getRecordByIdUseCase(recordRepository: RecordRepository) = GetRecordByIdUseCase(recordRepository)
 
     @Bean
     fun deleteRecordById(recordRepository: RecordRepository) = DeleteRecordByIdUseCase(recordRepository)
+
+    @Bean
+    fun getAllRecordsByIdsUseCase(recordRepository: RecordRepository) = GetRecordByIdUseCase(recordRepository)
 
     @Bean
     fun getUserInfoUseCase(userProvider: UserProvider) = GetUserInfoUseCase(userProvider)

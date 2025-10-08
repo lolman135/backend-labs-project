@@ -15,3 +15,11 @@ services:
       - "8082:8082"
     restart: always
 
+  expense_service:
+    build:
+      context: ExpenseService/.
+    container_name: expense-service
+    ports:
+      - "8083:8083"
+    environment:
+      - USER_SERVICE_URL=http://user-service:8082

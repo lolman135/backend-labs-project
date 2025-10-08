@@ -25,4 +25,14 @@ class RecordMockRepository : RecordRepository {
     override fun findById(id: UUID) = recordHolder[id]
 
     override fun existsById(id: UUID) = recordHolder.contains(id)
+
+    override fun findAllByIds(userId: UUID?, categoryId: UUID?): List<Record> {
+        return recordHolder.values.toList()
+            .filter { record ->
+                userId?.let { record.userId == it } ?: true
+            }
+            .filter { record ->
+                categoryId?.let { record.categoryId == it } ?: true
+            }
+    }
 }
