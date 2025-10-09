@@ -1,11 +1,11 @@
-package labs.backendlabsproject
+package labs.apigatewayservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class HealthCheckService
+class ApiGatewayServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<HealthCheckService>(*args)
+    runApplication<ApiGatewayServiceApplication>(*args)
 }
