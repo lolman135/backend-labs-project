@@ -4,7 +4,7 @@ import labs.expenseservice.application.useCase.UseCase
 import labs.expenseservice.domain.record.Record
 import labs.expenseservice.domain.record.RecordRepository
 
-class GetRecordsByIdsUseCase(
+class GetAllRecordsByIdsUseCase(
     private val recordRepository: RecordRepository
 ) : UseCase<GetAllRecordsByIdsCommand, List<Record>>{
 
