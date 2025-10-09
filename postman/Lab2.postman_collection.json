@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "099095c3-74e6-49e4-88ee-749838e9be05",
+		"name": "Lab2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40660495"
+	},
+	"item": [
+		{
+			"name": "Healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://{{domain}}/healthcheck"
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Andrew\",\n    \"email\": \"adn23@gmail.com\",\n    \"password\": \"qwerty12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://l{{domain}}/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Another User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Daniel\",\n    \"email\": \"danielen2@gmail.com\",\n    \"password\": \"qwerewq53\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/users"
+			},
+			"response": []
+		}
+	]
+}

@@ -27,14 +27,18 @@ docker-compose up --build
 In this way docker will rebuild container that includes application even you've built it earlier.
 
 #### • Without Docker (Required Gradle installed):
-
-First, if you don't have, you should install Gradle: building system for java project, and JRE 21.
-Install JRE (or JDK, if you want to modify code) [here](https://www.oracle.com/ua/java/technologies/downloads/). 
-Then install [Gradle](https://docs.gradle.org/current/userguide/installation.html#gs:installation).
-After installation navigate to project root directory, and run project with:
-```bash
-./gradlew bootRun
-```
+Because of using  microservice architecture I don't recommend to run it without docker compose.
+But if you want:
+ - First, if you don't have, you should install Gradle: building system for java project, and JRE 21.
+   Install JRE (or JDK, if you want to modify code) [here](https://www.oracle.com/ua/java/technologies/downloads/).
+   Then install [Gradle](https://docs.gradle.org/current/userguide/installation.html#gs:installation).
+ 
+ - After installation navigate to project root directory, and run each service one by one. Navigate to
+   ```HeathcheckService```, ```UserService```, ```ExcpenseService``` and```ApiGatewayService```, and run command inside 
+   each directory
+    ```bash
+    ./gradlew bootRun
+    ```
 
 #### • Check work
 Project starts on localhost on port 8080, so all requests should be sent on 
