@@ -1,5 +1,5 @@
 services:
-  healthcheck_service:
+  healthcheck-service:
     build:
       context: HealthcheckService/.
     container_name: healthcheck-service
@@ -7,7 +7,7 @@ services:
       - '8081:8081'
     restart: always
 
-  user_service:
+  user-service:
     build:
       context: UserService/.
     container_name: user-service
@@ -15,7 +15,7 @@ services:
       - "8082:8082"
     restart: always
 
-  expense_service:
+  expense-service:
     build:
       context: ExpenseService/.
     container_name: expense-service
@@ -23,3 +23,18 @@ services:
       - "8083:8083"
     environment:
       - USER_SERVICE_URL=http://user-service:8082
+
+  api-gateway-service:
+    build:
+      context: ApiGatewayService/.
+    container_name: api-gateway-service
+    ports:
+      - "8080:8080"
+    environment:
+      - HEALTHCHECK_URL=http://healthcheck-service:8081
+      - USER_URL=http://user-service:8082
+      - EXPENSE_URL=http://expense-service:8083
+    depends_on:
+      - user-service
+      - expense-service
+      - healthcheck-service

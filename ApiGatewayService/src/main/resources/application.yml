@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: api-gateway-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: healthcheck
+              uri: ${HEALTHCHECK_URL:http://localhost:8081}
+              predicates:
+                - Path=/healthcheck/**
+            - id: user
+              uri: ${USER_URL:http://localhost:8082}
+              predicates:
+                - Path=/api/v1/users/**
+            - id: expense
+              uri: ${EXPENSE_URL:http://localhost:8083}
+              predicates:
+                - Path=/api/v1/**
