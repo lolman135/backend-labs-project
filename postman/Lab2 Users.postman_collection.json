@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "099095c3-74e6-49e4-88ee-749838e9be05",
+		"name": "Lab2 Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40660495"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Andrew\",\n    \"email\": \"adn23@gmail.com\",\n    \"password\": \"qwerty12\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://{{domain}}/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Another User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Daniel\",\n    \"email\": \"danielen2@gmail.com\",\n    \"password\": \"qwerewq53\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://{{domain}}/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://{{domain}}/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://{{domain}}/api/v1/users/{{id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Info",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Daniel\",\n    \"email\": \"danielen234@gmail.com\",\n    \"password\": \"qwerewq53\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://{{domain}}/api/v1/users/{{id}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://{{domain}}/api/v1/users/{{id}}"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
