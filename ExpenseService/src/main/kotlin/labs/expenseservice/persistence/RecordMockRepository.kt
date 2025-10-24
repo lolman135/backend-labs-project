@@ -1,4 +1,4 @@
-package labs.expenseservice.persistence.repository
+package labs.expenseservice.persistence
 
 import labs.expenseservice.domain.record.Record
 import labs.expenseservice.domain.record.RecordRepository

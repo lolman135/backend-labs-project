@@ -13,8 +13,8 @@ import labs.expenseservice.application.useCase.record.GetAllRecordsByIdsUseCase
 import labs.expenseservice.application.useCase.userExternal.GetUserInfoUseCase
 import labs.expenseservice.domain.category.CategoryRepository
 import labs.expenseservice.domain.record.RecordRepository
-import labs.expenseservice.persistence.repository.CategoryMockRepository
-import labs.expenseservice.persistence.repository.RecordMockRepository
+import labs.expenseservice.persistence.CategoryMockRepository
+import labs.expenseservice.persistence.RecordMockRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.client.RestTemplate
