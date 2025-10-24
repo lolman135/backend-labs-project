@@ -1,1 +1,7 @@
-include("ApiGateWayService", "UserService", "ExpenseService", "HealthcheckService")
+include(
+    "ApiGateWayService",
+    "UserService",
+    "ExpenseService",
+    "HealthcheckService",
+    "CurrencyService"
+)

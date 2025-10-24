@@ -1,13 +1,15 @@
 package labs.userservice.domain
 
-enum class Role {
-    ROLE_USER,
-    ROLE_ADMIN;
+import java.util.UUID
 
-    companion object {
-        fun from(value: String): Role =
-            Role.entries.find { it.name.equals(value, ignoreCase = true) }
-                ?: throw IllegalArgumentException("Unknown role: $value")
+data class Role(
+    val id: UUID,
+    val name: String
+) {
+
+    fun rename(newName: String): Role{
+        require(newName.isNotBlank()){"Name cannot be empty"}
+        return copy(name = newName)
     }
-}
 
+}

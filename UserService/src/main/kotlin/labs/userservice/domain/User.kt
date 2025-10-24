@@ -7,8 +7,8 @@ data class User(
     val name: String,
     val email: String,
     val password: String,
-    //to simplify development role implements as enum, not separate entity
-    val roles: List<Role> = listOf()
+    val roleIds: List<UUID> = listOf(),
+    val defaultCurrencyId: UUID
 ) {
     fun rename(newName: String): User{
         require(newName.isNotBlank()){"Name cannot be empty"}
@@ -25,7 +25,11 @@ data class User(
         return copy(password = newPassword)
     }
 
-    fun addRole(newRole: Role): User {
-        return copy(roles = roles + newRole)
+    fun addRole(newRoleId: UUID): User {
+        return copy(roleIds = roleIds + id)
+    }
+
+    fun changeCurrency(newCurrencyId: UUID): User {
+        return copy(defaultCurrencyId = newCurrencyId)
     }
 }

@@ -1,6 +1,5 @@
-package labs.userservice.application.usecase
+package labs.userservice.application.usecase.user
 
-import labs.userservice.domain.Role
 import java.util.UUID
 
 data class UpdateUserCommand(
@@ -8,5 +7,6 @@ data class UpdateUserCommand(
     val name: String?,
     val email: String?,
     val password: String?,
-    val roles: List<Role>?
+    val rolesId: List<UUID>?,
+    val defaultCurrencyId: UUID?
 )

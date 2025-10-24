@@ -1,6 +1,8 @@
 package labs.userservice.infrastructure.dto.request
 
 import jakarta.validation.constraints.*
+import org.hibernate.validator.constraints.Currency
+import java.util.UUID
 
 
 data class UserDtoCreateRequest(
@@ -9,5 +11,6 @@ data class UserDtoCreateRequest(
     @field:Email(message = "Invalid email")
     val email: String,
     @field:Pattern(regexp = "^[a-zA-Z-_:#\\d%+]{7,30}", message = "Invalid password")
-    val password: String
+    val password: String,
+    val defaultCurrencyId: UUID
 )

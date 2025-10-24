@@ -1,5 +1,6 @@
-package labs.userservice.application.usecase
+package labs.userservice.application.usecase.user
 
+import labs.userservice.application.usecase.UseCase
 import labs.userservice.domain.User
 import labs.userservice.domain.UserRepository
 

@@ -1,1 +1,1 @@
-rootProject.name = "CurrencyService"
+rootProject.name = "currency-service"

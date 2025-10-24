@@ -1,13 +1,13 @@
 package labs.userservice.web.controller
 
 import jakarta.validation.Valid
-import labs.userservice.application.usecase.CreateUserCommand
-import labs.userservice.application.usecase.CreateUserUseCase
-import labs.userservice.application.usecase.DeleteUserByIdUseCase
-import labs.userservice.application.usecase.FindAllUsersUseCase
-import labs.userservice.application.usecase.FindUserByIdUseCase
-import labs.userservice.application.usecase.UpdateUserByIdUseCase
-import labs.userservice.application.usecase.UpdateUserCommand
+import labs.userservice.application.usecase.user.CreateUserCommand
+import labs.userservice.application.usecase.user.CreateUserUseCase
+import labs.userservice.application.usecase.user.DeleteUserByIdUseCase
+import labs.userservice.application.usecase.user.FindAllUsersUseCase
+import labs.userservice.application.usecase.user.FindUserByIdUseCase
+import labs.userservice.application.usecase.user.UpdateUserByIdUseCase
+import labs.userservice.application.usecase.user.UpdateUserCommand
 import labs.userservice.infrastructure.dto.request.UserDtoCreateRequest
 import labs.userservice.infrastructure.dto.request.UserDtoUpdateRequest
 import labs.userservice.infrastructure.dto.response.UserDtoResponse
