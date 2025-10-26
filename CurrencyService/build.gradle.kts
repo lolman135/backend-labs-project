@@ -56,8 +56,3 @@ allOpen {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-/* Use the public Kapt task type (or remove this block if not needed) */
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.Kapt> {
-    kaptClasspath.from(configurations.kapt.get())
-}

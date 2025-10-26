@@ -8,6 +8,6 @@ data class CurrencyDtoInbound(
     val code: String,
     @field:Pattern(regexp = "^[a-zA-Z]{1,20}$", message = "Invalid currency name format")
     val name: String,
-    @field:Pattern(regexp = "^[€£¥₹₽₴₩₸₦₱฿₫₪₡₲₵₭₼₺₨₾₳₯₰]$", message = "Invalid currency symbol")
+    @field:Pattern(regexp = "^[$€£¥₹₽₴₩₸₦₱฿₫₪₡₲₵₭₼₺₨₾₳₯₰]$", message = "Invalid currency symbol")
     val symbol: String
 )
