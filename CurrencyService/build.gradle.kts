@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
-    kotlin("kapt") version "1.9.0"
+    kotlin("kapt") version "1.9.25"
     id("org.springframework.boot") version "3.5.7"
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.jpa") version "1.9.25"
@@ -27,12 +27,18 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.mapstruct:mapstruct:1.6.3")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("jakarta.validation:jakarta.validation-api:3.1.0")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     runtimeOnly("org.postgresql:postgresql")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     kapt("org.mapstruct:mapstruct-processor:1.6.3")
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 kotlin {
@@ -49,4 +55,9 @@ allOpen {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+/* Use the public Kapt task type (or remove this block if not needed) */
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.Kapt> {
+    kaptClasspath.from(configurations.kapt.get())
 }

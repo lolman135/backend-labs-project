@@ -16,8 +16,6 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class AppConfig {
 
-    @Bean fun userRepository(): UserRepository = UserMockRepository()
-    @Bean fun roleRepository(): RoleRepository = RoleMockRepository()
     @Bean fun createUserUseCase(userRepository: UserRepository) = CreateUserUseCase(userRepository)
     @Bean fun findUserByIdUseCase(userRepository: UserRepository) = FindUserByIdUseCase(userRepository)
     @Bean fun findAllUsersUseCase(userRepository: UserRepository) = FindAllUsersUseCase(userRepository)
