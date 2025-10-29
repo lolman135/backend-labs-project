@@ -33,6 +33,8 @@ class CreateUserUseCase(
             roleIds = listOf(defaultRoleId),
             defaultCurrencyId = input.defaultCurrencyId
         )
+
+        println("user's roles :" + user.roleIds)
         return userRepository.save(user)
     }
 }

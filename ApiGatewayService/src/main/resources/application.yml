@@ -10,11 +10,23 @@ spring:
               uri: ${HEALTHCHECK_URL:http://localhost:8081}
               predicates:
                 - Path=/healthcheck/**
-            - id: user
+            - id: user-users
               uri: ${USER_URL:http://localhost:8082}
               predicates:
                 - Path=/api/v1/users/**
-            - id: expense
+            - id: user-roles
+              uri: ${USER_URL:http://localhost:8082}
+              predicates:
+                - Path=/api/v1/roles/**
+            - id: expense-categories
               uri: ${EXPENSE_URL:http://localhost:8083}
               predicates:
-                - Path=/api/v1/**
+                - Path=/api/v1/categories/**
+            - id: expense-records
+              uri: ${EXPENSE_URL:http://localhost:8083}
+              predicates:
+                - Path=/api/v1/records/**
+            - id: currency
+              uri: ${CURRENCY_URL:http://localhost:8085}
+              predicates:
+                - Path=/api/v1/currencies/**

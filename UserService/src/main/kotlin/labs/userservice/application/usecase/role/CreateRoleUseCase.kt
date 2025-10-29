@@ -12,7 +12,7 @@ class CreateRoleUseCase(private val roleRepository: RoleRepository) : UseCase<Up
         if (roleRepository.existsByName(input.name))
             throw EntityAlreadyExistsException("This role already exists")
 
-        val role = Role(id = UUID.randomUUID(), name = input.name)
+        val role = Role(id = UUID.randomUUID(), name = "ROLE_" + input.name.uppercase())
         return roleRepository.save(role)
     }
 }

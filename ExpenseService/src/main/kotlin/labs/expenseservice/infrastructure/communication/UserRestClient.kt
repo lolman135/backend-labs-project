@@ -1,6 +1,5 @@
 package labs.expenseservice.infrastructure.communication
 
-import labs.expenseservice.application.exception.EntityNotFoundException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate

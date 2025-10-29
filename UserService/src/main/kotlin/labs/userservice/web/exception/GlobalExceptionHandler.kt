@@ -3,6 +3,7 @@ package labs.userservice.web.exception
 import jakarta.servlet.http.HttpServletRequest
 import labs.userservice.application.exception.EntityAlreadyExistsException
 import labs.userservice.application.exception.EntityNotFoundException
+import labs.userservice.infrastructure.exception.JpaEntityNotFoundException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
@@ -22,6 +23,16 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(EntityNotFoundException::class)
     fun handleEntityNotFoundException(ex: EntityNotFoundException, request: HttpServletRequest): ProblemDetail {
+        val problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.message)
+        problem.title = "Not Found"
+        problem.type = URI.create("https://example.com/errors/not-found")
+        problem.instance = URI.create(request.requestURI)
+        log.warn(ex.message)
+        return problem
+    }
+
+    @ExceptionHandler(JpaEntityNotFoundException::class)
+    fun handleJpaEntityNotFoundException(ex: JpaEntityNotFoundException, request: HttpServletRequest): ProblemDetail {
         val problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.message)
         problem.title = "Not Found"
         problem.type = URI.create("https://example.com/errors/not-found")

@@ -12,6 +12,7 @@ import labs.userservice.infrastructure.dto.request.UserDtoCreateRequest
 import labs.userservice.infrastructure.dto.request.UserDtoUpdateRequest
 import labs.userservice.infrastructure.dto.response.UserDtoResponse
 import labs.userservice.infrastructure.mapper.UserMapper
+import labs.userservice.infrastructure.mapper.UserMapperHelper
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
@@ -23,6 +24,7 @@ import java.util.UUID
 @Validated
 class UserController(
     private val userMapper: UserMapper,
+    private val userMapperHelper: UserMapperHelper,
     private val createUserUseCase: CreateUserUseCase,
     private val findAllUsersUseCase: FindAllUsersUseCase,
     private val findUserByIdUseCase: FindUserByIdUseCase,
@@ -33,22 +35,22 @@ class UserController(
     @PostMapping
     fun createUser(@RequestBody @Valid createRequest: UserDtoCreateRequest): ResponseEntity<UserDtoResponse> {
         val command: CreateUserCommand = userMapper.toCreateCommand(createRequest)
-        val response = userMapper.toDto(createUserUseCase.execute(command))
-        val location = URI.create("/api/v1/users/${response.id}")
+        val response = userMapper.toDto(createUserUseCase.execute(command), userMapperHelper)
+        val location = URI.create("/api/v1/users")
         return ResponseEntity.created(location).body(response)
     }
 
     @GetMapping
     fun findAllUsers(): ResponseEntity<List<UserDtoResponse>> {
         val users = findAllUsersUseCase.execute(Unit)
-        val response = users.map { userMapper.toDto(it) }
+        val response = users.map { userMapper.toDto(it, userMapperHelper) }
         return ResponseEntity.ok(response)
     }
 
     @GetMapping("/{id}")
     fun findUserById(@PathVariable id: UUID): ResponseEntity<UserDtoResponse> {
         val response = findUserByIdUseCase.execute(id)
-        return ResponseEntity.ok(userMapper.toDto(response))
+        return ResponseEntity.ok(userMapper.toDto(response, userMapperHelper))
     }
 
     @PutMapping("/{id}")
@@ -58,7 +60,7 @@ class UserController(
     ): ResponseEntity<UserDtoResponse> {
         val command: UpdateUserCommand = userMapper.toUpdateCommand(updateRequest).copy(id = id)
         val updatedUser = updateUserByIdUseCase.execute(command)
-        return ResponseEntity.ok(userMapper.toDto(updatedUser))
+        return ResponseEntity.ok(userMapper.toDto(updatedUser, userMapperHelper))
     }
 
     @DeleteMapping("/{id}")

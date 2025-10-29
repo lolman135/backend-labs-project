@@ -4,7 +4,7 @@ import java.util.UUID
 
 interface RoleRepository {
 
-    fun save(user: Role): Role
+    fun save(role: Role): Role
     fun findAll(): List<Role>
     fun findById(id: UUID): Role?
     fun deleteById(id: UUID)

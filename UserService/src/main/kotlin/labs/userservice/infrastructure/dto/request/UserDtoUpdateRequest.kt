@@ -12,5 +12,5 @@ data class UserDtoUpdateRequest(
     @field:Pattern(regexp = "^[a-zA-Z-_:#\\d%+]{7,30}", message = "Invalid password")
     val password: String?,
     val roleIds: List<UUID>?,
-    val defaultCurrencyId: UUID
+    val defaultCurrencyId: UUID?
 )

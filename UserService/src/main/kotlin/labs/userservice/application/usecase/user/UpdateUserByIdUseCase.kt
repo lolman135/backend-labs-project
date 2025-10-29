@@ -1,5 +1,6 @@
 package labs.userservice.application.usecase.user
 
+import labs.userservice.application.exception.EntityAlreadyExistsException
 import labs.userservice.application.exception.EntityNotFoundException
 import labs.userservice.application.usecase.CurrencyProvider
 import labs.userservice.application.usecase.UseCase
@@ -17,6 +18,12 @@ class UpdateUserByIdUseCase(
         val existingUser = userRepository.findById(input.id!!)
             ?: throw EntityNotFoundException("User with id=${input.id} not found")
 
+        val newName = input.name ?: existingUser.name
+        val newEmail = input.email ?: existingUser.email
+
+        if ((existingUser.name != newName || existingUser.email != newEmail)
+            && userRepository.existsByNameOrEmail(newName, newEmail))
+            throw EntityAlreadyExistsException("This user already exists")
 
         var updatedUser = existingUser
         input.name?.let { updatedUser = updatedUser.rename(it) }
@@ -27,6 +34,7 @@ class UpdateUserByIdUseCase(
                 throw EntityNotFoundException("Role with id=$it not found")
             updatedUser = updatedUser.addRole(it)
         }
+
         input.defaultCurrencyId?.let {
             if (!currencyProvider.currencyExistsById(it))
                 throw EntityNotFoundException("Currency with id=$it not found")
