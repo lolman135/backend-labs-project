@@ -19,7 +19,12 @@ class UserProviderImpl(
         }
 
     override fun getUserInfoById(userId: UUID): UserExternalInfo {
-        val externalUser = userRestClient.getUserById(userId)
-        return UserExternalInfo(externalUser.id, externalUser.name)
+        try {
+            val externalUser = userRestClient.getUserById(userId)
+            return UserExternalInfo(externalUser.id, externalUser.name)
+        } catch (ex: IllegalStateException){
+            throw IllegalStateException(ex.message)
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package labs.userservice.config
 
 import labs.userservice.application.usecase.CurrencyProvider
+import labs.userservice.application.usecase.currencyExternal.GetCurrencyInfoUseCase
 import labs.userservice.application.usecase.role.CreateRoleUseCase
 import labs.userservice.application.usecase.role.DeleteRoleByIdUseCase
 import labs.userservice.application.usecase.role.FindAllRolesUseCase
@@ -62,4 +63,8 @@ class AppConfig {
 
     @Bean
     fun deleteRoleByIdUseCase(roleRepository: RoleRepository) = DeleteRoleByIdUseCase(roleRepository)
+
+    //external
+    @Bean
+    fun getCurrencyInfoUseCase(currencyProvider: CurrencyProvider) = GetCurrencyInfoUseCase(currencyProvider)
 }

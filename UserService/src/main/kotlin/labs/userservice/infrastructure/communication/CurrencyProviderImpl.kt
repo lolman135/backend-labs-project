@@ -18,7 +18,12 @@ class CurrencyProviderImpl(private val currencyRestClient: CurrencyRestClient) :
 
 
     override fun getCurrencyInfoById(currencyId: UUID): CurrencyInfo {
-        val externalCurrency = currencyRestClient.getCurrencyById(currencyId)
-        return CurrencyInfo(externalCurrency.id, externalCurrency.code)
+        try {
+            val externalCurrency = currencyRestClient.getCurrencyById(currencyId)
+            return CurrencyInfo(externalCurrency.id, externalCurrency.code)
+        } catch (ex: IllegalStateException){
+            throw IllegalStateException(ex.message)
+        }
+
     }
 }
