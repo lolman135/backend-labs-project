@@ -1,0 +1,8 @@
+CREATE DATABASE "currency-db";
+CREATE DATABASE "user-db";
+CREATE DATABASE "expense-db";
+
+CREATE USER admin WITH ENCRYPTED PASSWORD 'AdminAdmin';
+GRANT ALL PRIVILEGES ON DATABASE "currency-db" TO myuser;
+GRANT ALL PRIVILEGES ON DATABASE "user-db" TO myuser;
+GRANT ALL PRIVILEGES ON DATABASE "expense-db" TO myuser;

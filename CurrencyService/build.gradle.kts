@@ -28,6 +28,7 @@ dependencies {
     implementation("org.mapstruct:mapstruct:1.6.3")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("jakarta.validation:jakarta.validation-api:3.1.0")
+    implementation("org.flywaydb:flyway-database-postgresql")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
