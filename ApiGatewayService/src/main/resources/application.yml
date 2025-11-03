@@ -27,6 +27,6 @@ spring:
               predicates:
                 - Path=/api/v1/records/**
             - id: currency
-              uri: ${CURRENCY_URL:http://localhost:8085}
+              uri: ${CURRENCY_URL:http://localhost:8084}
               predicates:
                 - Path=/api/v1/currencies/**
