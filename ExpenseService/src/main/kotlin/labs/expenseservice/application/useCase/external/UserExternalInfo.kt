@@ -1,4 +1,4 @@
-package labs.expenseservice.application.useCase.userExternal
+package labs.expenseservice.application.useCase.external
 
 import java.util.UUID
 

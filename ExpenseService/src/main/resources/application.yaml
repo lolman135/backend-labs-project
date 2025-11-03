@@ -22,3 +22,6 @@ server:
 
 user-service:
   url: http://localhost:8082
+
+currency-service:
+  url: http://localhost:8085

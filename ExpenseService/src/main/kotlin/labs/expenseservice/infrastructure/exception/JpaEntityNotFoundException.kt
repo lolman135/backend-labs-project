@@ -1,4 +1,4 @@
-package labs.userservice.infrastructure.exception
+package labs.expenseservice.infrastructure.exception
 
 import java.lang.Exception
 

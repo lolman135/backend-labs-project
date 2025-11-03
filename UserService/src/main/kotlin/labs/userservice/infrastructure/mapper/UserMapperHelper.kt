@@ -1,6 +1,7 @@
 package labs.userservice.infrastructure.mapper
 
 import labs.userservice.application.usecase.currencyExternal.GetCurrencyInfoUseCase
+import labs.userservice.infrastructure.dto.response.CurrencySubDto
 import labs.userservice.infrastructure.exception.JpaEntityNotFoundException
 import labs.userservice.persistence.role.RoleJpaRepository
 import org.springframework.stereotype.Component
@@ -19,7 +20,8 @@ class UserMapperHelper(
         }.toMutableSet()
 
 
-    fun getCurrencyCodeFromCurrencyId(currencyId: UUID): String{
-        return getCurrencyInfoUseCase.execute(currencyId).code
+    fun getCurrencyFromCurrencyId(currencyId: UUID): CurrencySubDto{
+        val info = getCurrencyInfoUseCase.execute(currencyId)
+        return CurrencySubDto(info.id, info.code)
     }
 }

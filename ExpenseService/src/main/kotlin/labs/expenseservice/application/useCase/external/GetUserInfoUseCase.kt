@@ -1,4 +1,4 @@
-package labs.expenseservice.application.useCase.userExternal
+package labs.expenseservice.application.useCase.external
 
 import labs.expenseservice.application.exception.EntityNotFoundException
 import labs.expenseservice.application.useCase.UseCase

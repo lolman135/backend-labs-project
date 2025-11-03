@@ -34,7 +34,7 @@ class RecordController(
 
     @PostMapping
     fun save(@RequestBody recordDtoRequest: RecordDtoRequest): ResponseEntity<RecordDtoResponse> {
-        val command = recordMapper.toCommand(recordDtoRequest)
+        val command = recordMapper.toCommand(recordDtoRequest, recordMapperHelper)
         val response = recordMapper.toDto(createRecordUseCase.execute(command), recordMapperHelper)
         val location = URI.create("/api/v1/records/${response.id}")
         return ResponseEntity.created(location).body(response)

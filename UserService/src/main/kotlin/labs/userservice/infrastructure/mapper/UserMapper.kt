@@ -25,7 +25,7 @@ interface UserMapper {
     )
     @Mapping(
         target = "defaultCurrency",
-        expression = "java(userMapperHelper.getCurrencyCodeFromCurrencyId(user.getDefaultCurrencyId()))"
+        expression = "java(userMapperHelper.getCurrencyFromCurrencyId(user.getDefaultCurrencyId()))"
     )
     fun toDto(user: User, userMapperHelper: UserMapperHelper): UserDtoResponse
 

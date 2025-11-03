@@ -1,7 +1,7 @@
 package labs.expenseservice.infrastructure.communication
 
 import labs.expenseservice.application.useCase.UserProvider
-import labs.expenseservice.application.useCase.userExternal.UserExternalInfo
+import labs.expenseservice.application.useCase.external.UserExternalInfo
 import org.springframework.stereotype.Component
 import java.util.UUID
 
@@ -25,6 +25,13 @@ class UserProviderImpl(
         } catch (ex: IllegalStateException){
             throw IllegalStateException(ex.message)
         }
+    }
 
+    override fun getCurrencyIdByUserId(userId: UUID): UUID {
+        try {
+            return userRestClient.getUserById(userId).defaultCurrency.id
+        } catch (ex: IllegalStateException){
+            throw IllegalStateException(ex.message)
+        }
     }
 }
