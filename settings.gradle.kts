@@ -1,5 +1,5 @@
 include(
-    "ApiGateWayService",
+    "ApiGatewayService",
     "UserService",
     "ExpenseService",
     "HealthcheckService",
