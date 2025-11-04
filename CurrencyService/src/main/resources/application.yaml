@@ -3,9 +3,9 @@ spring:
     name: CurrencyService
 
   datasource:
-    url: ${CURRENCY_DB_URL:jdbc:postgresql://host.docker.internal:5432/currency_db}
-    username: ${CURRENCY_DB_USERNAME:postgres}
-    password: ${CURRENCY_DB_PASSWORD:postgres}
+    url: ${CURRENCY_DB_URL:jdbc:postgresql://dpg-d450msvgi27c73aksnj0-a.frankfurt-postgres.render.com:5432/currency-db?sslmode=require}
+    username: ${CURRENCY_DB_USERNAME:main_user}
+    password: ${CURRENCY_DB_PASSWORD:nhxkff1DGkNVDWtFhRGTsEAQnOk8ssNk}
     driver-class-name: org.postgresql.Driver
 
   flyway:

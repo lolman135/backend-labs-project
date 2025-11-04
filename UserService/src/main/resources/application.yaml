@@ -7,9 +7,9 @@ spring:
       enabled: false
 
   datasource:
-    url: ${USER_DB_URL:jdbc:postgresql://host.docker.internal:5432/user_db}
-    username: ${USER_DB_USERNAME:postgres}
-    password: ${USER_DB_PASSWORD:postgres}
+    url: ${USER_DB_URL:jdbc:postgresql://dpg-d450msvgi27c73aksnj0-a.frankfurt-postgres.render.com:5432/user-db?sslmode=require}
+    username: ${USER_DB_USERNAME:main_user}
+    password: ${USER_DB_PASSWORD:nhxkff1DGkNVDWtFhRGTsEAQnOk8ssNk}
     driver-class-name: org.postgresql.Driver
 
   flyway:
