@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: healthcheck-service
+  docker:
+    compose:
+      enabled: false
+server:
+  port: 8081

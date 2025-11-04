@@ -3,9 +3,9 @@ spring:
     name: ExpenseService
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/expense_db
-    username: postgres
-    password: postgres
+    url: ${EXPENSE_DB_URL:jdbc:postgresql://host.docker.internal:5432/expense_db}
+    username: ${EXPENSE_DB_USERNAME:postgres}
+    password: ${EXPENSE_DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 
   flyway:
