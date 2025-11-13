@@ -12,23 +12,27 @@ services:
       - postgres-data:/var/lib/postgresql/data
       - ./postgres/init:/docker-entrypoint-initdb.d
     restart: always
+    networks:
+      - inner-services
 
   healthcheck-service:
     build:
       context: HealthcheckService/.
     container_name: healthcheck-service
     ports:
-      - '8081:8081'
+      - '8081'
     restart: always
     depends_on:
       - postgres
+    networks:
+      - inner-services
 
   currency-service:
     build:
       context: CurrencyService/.
     container_name: currency-service
     ports:
-      - "8084:8084"
+      - "8084"
     restart: always
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/currency-db
@@ -37,13 +41,15 @@ services:
       - SPRING_FLYWAY_BASELINE_ON_MIGRATE=true
     depends_on:
       - postgres
+    networks:
+      - inner-services
 
   user-service:
     build:
       context: UserService/.
     container_name: user-service
     ports:
-      - "8082:8082"
+      - "8082"
     restart: always
     environment:
       - CURRENCY_SERVICE_URL=http://currency-service:8084
@@ -53,13 +59,15 @@ services:
       - SPRING_FLYWAY_BASELINE_ON_MIGRATE=true
     depends_on:
       - postgres
+    networks:
+      - inner-services
 
   expense-service:
     build:
       context: ExpenseService/.
     container_name: expense-service
     ports:
-      - "8083:8083"
+      - "8083"
     environment:
       - USER_SERVICE_URL=http://user-service:8082
       - CURRENCY_SERVICE_URL=http://currency-service:8084
@@ -69,6 +77,8 @@ services:
       - SPRING_FLYWAY_BASELINE_ON_MIGRATE=true
     depends_on:
       - postgres
+    networks:
+      - inner-services
 
   api-gateway-service:
     build:
@@ -86,6 +96,12 @@ services:
       - expense-service
       - healthcheck-service
       - currency-service
+    networks:
+      - inner-services
 
 volumes:
   postgres-data:
+
+networks:
+  inner-services:
+    driver: bridge

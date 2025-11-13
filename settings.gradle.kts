@@ -3,5 +3,6 @@ include(
     "UserService",
     "ExpenseService",
     "HealthcheckService",
-    "CurrencyService"
+    "CurrencyService",
+    "AuthService"
 )
