@@ -35,7 +35,7 @@ class UserEntity(
     var roles: MutableSet<RoleEntity>? = mutableSetOf(),
 
     @get:Column(name = "currency_id")
-    var defaultCurrencyId: UUID
+    var defaultCurrencyId: UUID?
 ) {
 
     override fun equals(other: Any?): Boolean {

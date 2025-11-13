@@ -7,5 +7,5 @@ data class UserDtoResponse(
     val name: String,
     val email: String,
     val roles: List<String>,
-    val defaultCurrency: CurrencySubDto
+    val defaultCurrency: CurrencySubDto?
 )

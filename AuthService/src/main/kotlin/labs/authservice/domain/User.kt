@@ -1,4 +1,4 @@
-package labs.userservice.domain
+package labs.authservice.domain
 
 import java.util.UUID
 
@@ -7,8 +7,7 @@ data class User(
     val name: String,
     val email: String,
     val password: String,
-    val roleIds: List<UUID> = listOf(),
-    val defaultCurrencyId: UUID?
+    val roles: List<Role> = listOf(),
 ) {
     fun rename(newName: String): User{
         require(newName.isNotBlank()){"Name cannot be empty"}
@@ -25,11 +24,7 @@ data class User(
         return copy(password = newPassword)
     }
 
-    fun addRole(newRoleId: UUID): User {
-        return copy(roleIds = roleIds + newRoleId)
-    }
-
-    fun changeCurrency(newCurrencyId: UUID): User {
-        return copy(defaultCurrencyId = newCurrencyId)
+    fun addRole(newRole: Role): User{
+        return copy(roles = roles + newRole)
     }
 }

@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS users(
                                     name VARCHAR(50) NOT NULL,
                                     email VARCHAR(60) NOT NULL,
                                     password TEXT NOT NULL,
-                                    currency_id UUID NOT NULL
+                                    currency_id UUID
 );
 
 CREATE TABLE IF NOT EXISTS roles(

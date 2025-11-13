@@ -19,7 +19,7 @@ class CreateUserUseCase(
         if (userRepository.existsByNameOrEmail(input.name, input.email))
             throw EntityAlreadyExistsException("This user is already exists")
 
-        if (!currencyProvider.currencyExistsById(input.defaultCurrencyId))
+        if (input.defaultCurrencyId != null && !currencyProvider.currencyExistsById(input.defaultCurrencyId))
             throw EntityNotFoundException("Currency with id=${input.defaultCurrencyId} not found")
 
         val defaultRoleId = roleRepository.getDefaultRole()?.id

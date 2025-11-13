@@ -20,7 +20,10 @@ class UserMapperHelper(
         }.toMutableSet()
 
 
-    fun getCurrencyFromCurrencyId(currencyId: UUID): CurrencySubDto{
+    fun getCurrencyFromCurrencyId(currencyId: UUID?): CurrencySubDto?{
+        if (currencyId == null)
+            return null
+
         val info = getCurrencyInfoUseCase.execute(currencyId)
         return CurrencySubDto(info.id, info.code)
     }

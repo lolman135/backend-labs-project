@@ -12,5 +12,5 @@ data class UserDtoCreateRequest(
     val email: String,
     @field:Pattern(regexp = "^[a-zA-Z-_:#\\d%+]{7,30}", message = "Invalid password")
     val password: String,
-    val defaultCurrencyId: UUID
+    val defaultCurrencyId: UUID?
 )

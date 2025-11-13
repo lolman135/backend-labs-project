@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: AuthService
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+auth:
+  jwt:
+    access-token-ttl-sec: 86400
+    public-key-location: classpath:keys/key.pem
