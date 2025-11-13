@@ -31,6 +31,8 @@ dependencies {
     implementation("org.mapstruct:mapstruct:1.6.3")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("jakarta.validation:jakarta.validation-api:3.1.0")
+    implementation("org.springframework.boot:spring-boot-starter-validation:3.5.5")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

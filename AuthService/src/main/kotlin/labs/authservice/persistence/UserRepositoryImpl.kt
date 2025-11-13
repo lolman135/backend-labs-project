@@ -28,4 +28,8 @@ class UserRepositoryImpl(
 
     override fun existsByNameOrEmail(name: String, email: String) =
         jpaUserRepository.existsUserEntityByNameOrEmail(name = name, email = email)
+
+    override fun findUserByEmail(email: String): User? = jpaUserRepository.findUserEntityByEmail(email).map {
+        userMapper.toDomain(it, userMapperHelper)
+    }.orElse(null)
 }
