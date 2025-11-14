@@ -1,9 +1,9 @@
 package labs.authservice.persistence
 
+import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import org.intellij.lang.annotations.Identifier
 import java.util.UUID
 
 @Entity
@@ -11,7 +11,10 @@ import java.util.UUID
 class RoleEntity (
 
     @get:Id
+    @get:Column(name = "id")
     var id: UUID? = null,
+
+    @get:Column(name = "name")
     var name: String
 ){
     override fun equals(other: Any?): Boolean {

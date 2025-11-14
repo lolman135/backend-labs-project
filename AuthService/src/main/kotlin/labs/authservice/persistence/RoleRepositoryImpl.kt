@@ -3,7 +3,9 @@ package labs.authservice.persistence
 import labs.authservice.domain.Role
 import labs.authservice.domain.RoleRepository
 import labs.authservice.infrastructure.mapper.RoleMapper
+import org.springframework.stereotype.Repository
 
+@Repository
 class RoleRepositoryImpl(
     private val jpaRoleRepository: JpaRoleRepository,
     private val roleMapper: RoleMapper

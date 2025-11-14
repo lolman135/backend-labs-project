@@ -21,7 +21,6 @@ class RegisterUseCase(
         if (userRepository.existsByNameOrEmail(input.name, input.email))
             throw EntityAlreadyExistsException("User with this data already exists")
 
-
         val user = User(
             id = UUID.randomUUID(),
             name = input.name,

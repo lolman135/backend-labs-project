@@ -14,4 +14,4 @@ spring:
 auth:
   jwt:
     access-token-ttl-sec: 86400
-    public-key-location: classpath:keys/key.pem
+    secret-key: classpath:keys/key.pem
