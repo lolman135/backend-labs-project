@@ -1,5 +1,6 @@
 package labs.authservice.config
 
+import labs.authservice.security.CustomUserDetailService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
@@ -11,7 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
-class SecurityConfig {
+class SecurityConfig(
+    private val customUserDetailService: CustomUserDetailService
+) {
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain{

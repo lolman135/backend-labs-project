@@ -15,3 +15,6 @@ auth:
   jwt:
     access-token-ttl-sec: 86400
     secret-key: classpath:keys/key.pem
+
+server:
+  port: 8085

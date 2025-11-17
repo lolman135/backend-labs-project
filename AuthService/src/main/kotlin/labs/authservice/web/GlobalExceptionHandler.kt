@@ -1,10 +1,11 @@
-package labs.userservice.web.exception
+package labs.authservice.web
 
 import jakarta.servlet.http.HttpServletRequest
-import labs.userservice.application.exception.EntityAlreadyExistsException
-import labs.userservice.application.exception.EntityNotFoundException
-import labs.userservice.infrastructure.exception.JpaEntityNotFoundException
+import labs.authservice.application.exception.EntityAlreadyExistsException
+import labs.authservice.application.exception.EntityNotFoundException
+import labs.authservice.application.exception.InvalidCredentialsException
 import org.slf4j.LoggerFactory
+import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
 import org.springframework.http.ProblemDetail
@@ -31,10 +32,10 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         return problem
     }
 
-    @ExceptionHandler(JpaEntityNotFoundException::class)
-    fun handleJpaEntityNotFoundException(ex: JpaEntityNotFoundException, request: HttpServletRequest): ProblemDetail {
-        val problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, ex.message)
-        problem.title = "Not Found"
+    @ExceptionHandler(InvalidCredentialsException::class)
+    fun handleInvalidCredentialsException(ex: InvalidCredentialsException, request: HttpServletRequest): ProblemDetail {
+        val problem = ProblemDetail.forStatusAndDetail(HttpStatus.UNAUTHORIZED, ex.message)
+        problem.title = "Unauthorized"
         problem.type = URI.create("https://example.com/errors/not-found")
         problem.instance = URI.create(request.requestURI)
         log.warn(ex.message)
@@ -54,8 +55,6 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         return problem
     }
 
-
-
     @ExceptionHandler(IllegalArgumentException::class)
     fun handleIllegalArgumentException(ex: IllegalArgumentException, request: HttpServletRequest): ProblemDetail {
         val problem = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.message ?: "Bad Request")
@@ -69,7 +68,7 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(MethodArgumentNotValidException::class)
     override fun handleMethodArgumentNotValid(
         ex: MethodArgumentNotValidException,
-        headers: org.springframework.http.HttpHeaders,
+        headers: HttpHeaders,
         status: HttpStatusCode,
         request: WebRequest
     ): ResponseEntity<Any> {
