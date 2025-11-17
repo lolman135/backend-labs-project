@@ -65,7 +65,6 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         return problem
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException::class)
     override fun handleMethodArgumentNotValid(
         ex: MethodArgumentNotValidException,
         headers: HttpHeaders,

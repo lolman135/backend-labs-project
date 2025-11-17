@@ -62,6 +62,23 @@ services:
     networks:
       - inner-services
 
+  auth-service:
+    build:
+      context: AuthService/.
+    container_name: auth-service
+    ports:
+      - "8085"
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/user-db
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=AdminAdmin
+      - SPRING_FLYWAY_BASELINE_ON_MIGRATE=true
+    depends_on:
+      - postgres
+    networks:
+      - inner-services
+
   expense-service:
     build:
       context: ExpenseService/.

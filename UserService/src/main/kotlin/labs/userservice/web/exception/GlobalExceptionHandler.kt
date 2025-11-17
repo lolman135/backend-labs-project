@@ -66,7 +66,6 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         return problem
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException::class)
     override fun handleMethodArgumentNotValid(
         ex: MethodArgumentNotValidException,
         headers: org.springframework.http.HttpHeaders,
