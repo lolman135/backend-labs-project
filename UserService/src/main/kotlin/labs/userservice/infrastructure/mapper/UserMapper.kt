@@ -1,9 +1,7 @@
 package labs.userservice.infrastructure.mapper
 
-import labs.userservice.application.usecase.user.CreateUserCommand
 import labs.userservice.application.usecase.user.UpdateUserCommand
 import labs.userservice.domain.User
-import labs.userservice.infrastructure.dto.request.UserDtoCreateRequest
 import labs.userservice.infrastructure.dto.request.UserDtoUpdateRequest
 import labs.userservice.infrastructure.dto.response.UserDtoResponse
 import labs.userservice.persistence.user.UserEntity
@@ -12,8 +10,6 @@ import org.mapstruct.Mapping
 
 @Mapper(componentModel = "spring", imports = [labs.userservice.persistence.role.RoleEntity::class])
 interface UserMapper {
-
-    fun toCreateCommand(createDto: UserDtoCreateRequest): CreateUserCommand
 
     fun toUpdateCommand(updateDto: UserDtoUpdateRequest): UpdateUserCommand
 

@@ -108,11 +108,13 @@ services:
       - USER_URL=http://user-service:8082
       - EXPENSE_URL=http://expense-service:8083
       - CURRENCY_URL=http://currency-service:8084
+      - AUTH_URL=http://auth-service:8085
     depends_on:
       - user-service
       - expense-service
       - healthcheck-service
       - currency-service
+      - auth-service
     networks:
       - inner-services
 

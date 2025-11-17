@@ -46,7 +46,8 @@ app:
 auth:
   jwt:
     access-token-ttl-sec: 86400
-    secret-key: classpath:keys/key.pem
+    secret-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo57pTUtrkivc/Zv4KqS2pi5423AAAuvINa3cqBuXz2GRMjGwh7BgO61XbXCWkPftjcYqMIE3PWryMkbbGvxz5nGo4Zqyfmu1hpDMHfL+4sCyjxrXf1As0GPD+Kg+znxnybxjAKM4HbYGApqbH2HNxRpnC2oc8wgJ0eTrlxrofK6t9X4P0GTuOk6u0zGxTlAAf1J5y/Pm8MBSgkXkNGMcKwZgtU4aRGN4edKQaa8Vvttvl2UDShLuxSMsxES822yfQpiwbYAt/8rqK+Tq9b1bm0wWFtrgyMX
+
 
 server:
   port: 8080

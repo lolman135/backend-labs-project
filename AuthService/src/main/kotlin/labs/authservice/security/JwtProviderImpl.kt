@@ -14,11 +14,11 @@ import javax.crypto.SecretKey
 
 @Component
 class JwtProviderImpl(
-    @param:Value("\${auth.jwt.secret-key}") private val keyResource: Resource,
+    @param:Value("\${auth.jwt.secret-key}") private val key: String,
     @param:Value("\${auth.jwt.access-token-ttl-sec}") private val jwtExpirationMs: Long
 ) : JwtProvider{
 
-    private val secretKey: SecretKey = Keys.hmacShaKeyFor(getKeyAsString().toByteArray())
+    private val secretKey: SecretKey = Keys.hmacShaKeyFor(key.toByteArray())
 
     override fun generateToken(id: UUID): String {
         val now = Date()
@@ -49,13 +49,5 @@ class JwtProviderImpl(
         true
     } catch (_: Exception){
         false
-    }
-
-    private fun getKeyAsString(): String {
-        return Files.readString(keyResource.file.toPath())
-            .replace("-----BEGIN KEY-----", "")
-            .replace("-----END KEY-----", "")
-            .replace("\\s".toRegex(), "")
-            .replace("\\n".toRegex(), "")
     }
 }

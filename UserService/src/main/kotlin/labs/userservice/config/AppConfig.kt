@@ -7,7 +7,6 @@ import labs.userservice.application.usecase.role.DeleteRoleByIdUseCase
 import labs.userservice.application.usecase.role.FindAllRolesUseCase
 import labs.userservice.application.usecase.role.FindRoleByIdUseCase
 import labs.userservice.application.usecase.role.UpdateRoleByIdUseCase
-import labs.userservice.application.usecase.user.CreateUserUseCase
 import labs.userservice.application.usecase.user.DeleteUserByIdUseCase
 import labs.userservice.application.usecase.user.FindAllUsersUseCase
 import labs.userservice.application.usecase.user.FindUserByIdUseCase
@@ -25,12 +24,6 @@ class AppConfig {
     fun restTemplate() = RestTemplate()
 
     //users
-    @Bean
-    fun createUserUseCase(
-        userRepository: UserRepository,
-        roleRepository: RoleRepository,
-        currencyProvider: CurrencyProvider
-    ) = CreateUserUseCase(userRepository, roleRepository, currencyProvider)
 
     @Bean
     fun findUserByIdUseCase(userRepository: UserRepository) = FindUserByIdUseCase(userRepository)
