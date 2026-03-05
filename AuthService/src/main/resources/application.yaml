@@ -3,9 +3,9 @@ spring:
     name: AuthService
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/user_db
-    username: postgres
-    password: postgres
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/user_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_USER:postgres}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -14,7 +14,7 @@ spring:
 auth:
   jwt:
     access-token-ttl-sec: 86400
-    secret-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo57pTUtrkivc/Zv4KqS2pi5423AAAuvINa3cqBuXz2GRMjGwh7BgO61XbXCWkPftjcYqMIE3PWryMkbbGvxz5nGo4Zqyfmu1hpDMHfL+4sCyjxrXf1As0GPD+Kg+znxnybxjAKM4HbYGApqbH2HNxRpnC2oc8wgJ0eTrlxrofK6t9X4P0GTuOk6u0zGxTlAAf1J5y/Pm8MBSgkXkNGMcKwZgtU4aRGN4edKQaa8Vvttvl2UDShLuxSMsxES822yfQpiwbYAt/8rqK+Tq9b1bm0wWFtrgyMX
+    secret-key: ${API_KEY:MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo57pTUtrkivc/Zv4KqS2pi5423AAAuvINa3cqBuXz2GRMjGwh7BgO61XbXCWkPftjcYqMIE3PWryMkbbGvxz5nGo4Zqyfmu1hpDMHfL+4sCyjxrXf1As0GPD+Kg+znxnybxjAKM4HbYGApqbH2HNxRpnC2oc8wgJ0eTrlxrofK6t9X4P0GTuOk6u0zGxTlAAf1J5y/Pm8MBSgkXkNGMcKwZgtU4aRGN4edKQaa8Vvttvl2UDShLuxSMsxES822yfQpiwbYAt/8rqK+Tq9b1bm0wWFtrgyMX}
 
 server:
   port: 8085
