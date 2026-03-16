@@ -6,8 +6,7 @@
 ### Description
 Hi, my name is Kyrylo, i'm a student at NTUU KPI, FICE, F7 "Computer Engineering" specialization.
 This project was created for my subject "Backend". It uses Kotlin as main language and default Java stack:
-Spring Framework (Spring Boot, Spring Data and Spring Security) and Hibernate ORM and Gradle as build system (Everything includes data and security
-will be added soon).
+Spring Framework (Spring Boot, Spring Data and Spring Security) and Hibernate ORM and Gradle as build system.
 
 ### Instructions
 
@@ -26,28 +25,31 @@ docker-compose up --build
 ```
 In this way docker will rebuild container that includes application even you've built it earlier.
 
-#### • Without Docker (Required Gradle installed):
+#### • Without Docker:
 Because of using  microservice architecture I don't recommend to run it without docker compose.
 But if you want:
- - First, if you don't have, you should install Gradle: building system for java project, and JRE 21.
+ - First, if you don't have, you can install Gradle: building system for java project, and JRE 21.
    Install JRE (or JDK, if you want to modify code) [here](https://www.oracle.com/ua/java/technologies/downloads/).
    Then install [Gradle](https://docs.gradle.org/current/userguide/installation.html#gs:installation).
- 
+   - (Actually, if you don't want, you don't have to install Gradle. Instead of you can use Gradle Wrapper. Simply type)
+     ```bash
+      ./gradlew bootRun
+      ```
  - After installation navigate to project root directory, and run each service one by one. Navigate to
-   ```HeathcheckService```, ```UserService```, ```ExcpenseService``` and```ApiGatewayService```, and run command inside 
+   ```HeathcheckService```, ```UserService```, ```ExcpenseService```, ```CurrencyService```, ```AuthService``` and```ApiGatewayService```, and run command inside 
    each directory
     ```bash
-    ./gradlew bootRun
+    gradle bootRun
     ```
 
 #### • Check work
-Project starts on localhost on port 8080, so all requests should be sent on 
+Project starts on localhost on port 8080 - 8085. 8080 is gateway, so use this address and port
 ```http://localhost:8080```
 To check that project working send get request on ```http://localhost:8080/healthcheck```
 
 Also, project is already deployed on Render hosting. Check workability here:<br>
 https://backend-labs-project.onrender.com/healthcheck
-<hr>
+(Actually it is dead because of expired db)
 
 ### Conclusion
 For now that's all. In the future I'll modify this file and project in all. Have a nice day
