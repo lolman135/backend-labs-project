@@ -24,7 +24,6 @@ class JwtGatewayFilter(
     override fun filter(exchange: ServerWebExchange, chain: GatewayFilterChain): Mono<Void> {
         val path = exchange.request.uri.path
 
-        // Самый надёжный способ — просто startsWith
         if (publicPrefixes.any { path.startsWith(it) }) {
             return chain.filter(exchange)
         }
