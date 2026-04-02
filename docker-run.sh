@@ -7,19 +7,19 @@ docker run -d --name postgres --network system-net \
   -v pgdata:/var/lib/postgresql/data \
   my-postgres
 
-docker run -d --name user-service --network system-net \
+docker run -d --name user-service --network system-net -p 8082:8080 \
   -e SERVER_PORT=8080 \
   -e DB_URL=jdbc:postgresql://postgres:5432/user-db \
   -e DB_USER=admin -e DB_PASSWORD=AdminAdmin \
   my-user
 
-docker run -d --name currency-service --network system-net \
+docker run -d --name currency-service --network system-net -p 8084:8080 \
   -e SERVER_PORT=8080 \
   -e DB_URL=jdbc:postgresql://postgres:5432/currency-db \
   -e DB_USER=admin -e DB_PASSWORD=AdminAdmin \
   my-currency
 
-docker run -d --name expense-service --network system-net \
+docker run -d --name expense-service --network system-net -p 8083:8080 \
   -e SERVER_PORT=8080 \
   -e DB_URL=jdbc:postgresql://postgres:5432/expense-db \
   -e DB_USER=admin -e DB_PASSWORD=AdminAdmin \
@@ -27,13 +27,13 @@ docker run -d --name expense-service --network system-net \
   -e CURRENCY_URL=http://currency-service:8080 \
   my-expense
 
-docker run -d --name auth-service --network system-net \
+docker run -d --name auth-service --network system-net -p 8085:8080 \
   -e SERVER_PORT=8080 \
   -e DB_URL=jdbc:postgresql://postgres:5432/user-db \
   -e DB_USER=admin -e DB_PASSWORD=AdminAdmin \
   my-auth
 
-docker run -d --name healthcheck-service --network system-net \
+docker run -d --name healthcheck-service --network system-net -p 8081:8080 \
   -e SERVER_PORT=8080 \
   my-healthcheck
 
