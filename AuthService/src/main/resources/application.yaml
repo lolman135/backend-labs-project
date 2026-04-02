@@ -7,10 +7,13 @@ spring:
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
+
   jpa:
     hibernate:
       ddl-auto: validate
-
 auth:
   jwt:
     access-token-ttl-sec: 86400
