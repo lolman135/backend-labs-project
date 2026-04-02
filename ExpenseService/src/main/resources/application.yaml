@@ -23,10 +23,10 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: 8083
+  port: ${SERVER_PORT:8083}
 
 user-service:
-  url: http://localhost:8082
+  url: ${USER_URL:http://localhost:8082}
 
 currency-service:
-  url: http://localhost:8084
+  url: ${CURRENCY_URL:http://localhost:8084}

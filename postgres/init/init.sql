@@ -1,0 +1,7 @@
+CREATE DATABASE "currency-db";
+CREATE DATABASE "user-db";
+CREATE DATABASE "expense-db";
+
+GRANT ALL PRIVILEGES ON DATABASE "currency-db" TO admin;
+GRANT ALL PRIVILEGES ON DATABASE "user-db" TO admin;
+GRANT ALL PRIVILEGES ON DATABASE "expense-db" TO admin;
