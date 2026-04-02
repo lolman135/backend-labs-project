@@ -11,7 +11,7 @@ RUN ./gradlew dependencies --no-daemon
 
 COPY src src
 
-RUN ./gradlew clean build -x test
+RUN ./gradlew clean build -x test && rm -rf /home/gradle/.gradle
 
 FROM gcr.io/distroless/java21-debian12
 
