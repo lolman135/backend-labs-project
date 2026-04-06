@@ -1,23 +1,8 @@
-FROM gradle:9.1.0-jdk21-alpine AS build
-
-WORKDIR /app
-
-COPY gradle gradle
-COPY gradlew .
-COPY build.gradle.kts .
-COPY settings.gradle.kts .
-
-RUN ./gradlew dependencies --no-daemon
-
-COPY src src
-
-RUN ./gradlew clean build -x test && rm -rf /home/gradle/.gradle
-
 FROM gcr.io/distroless/java21-debian12
 
 WORKDIR /app
 
-COPY --from=build /app/build/libs/*-SNAPSHOT.jar app.jar
+COPY  build/libs/*-SNAPSHOT.jar app.jar
 
 EXPOSE 8080
 
