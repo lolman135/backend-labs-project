@@ -1,7 +1,7 @@
 services:
 
   postgres:
-    image: postgres:17
+    image: registry.gitlab.com/kkirilll2006/devops-labs/postgres:latest
     container_name: postgres
     environment:
       POSTGRES_USER: admin
@@ -10,14 +10,12 @@ services:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
-      - ./postgres/init:/docker-entrypoint-initdb.d
     restart: always
     networks:
       - inner-services
 
   healthcheck-service:
-    build:
-      context: HealthcheckService/.
+    image: registry.gitlab.com/kkirilll2006/devops-labs/healthcheck:latest
     container_name: healthcheck-service
     ports:
       - '8081'
@@ -28,14 +26,13 @@ services:
       - inner-services
 
   currency-service:
-    build:
-      context: CurrencyService/.
+    image: registry.gitlab.com/kkirilll2006/devops-labs/currency
     container_name: currency-service
     ports:
       - "8084"
     restart: always
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/currency-db
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/currency-db:latest
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=AdminAdmin
       - SPRING_FLYWAY_BASELINE_ON_MIGRATE=true
@@ -45,8 +42,7 @@ services:
       - inner-services
 
   user-service:
-    build:
-      context: UserService/.
+    image: registry.gitlab.com/kkirilll2006/devops-labs/user:latest
     container_name: user-service
     ports:
       - "8082"
@@ -63,8 +59,7 @@ services:
       - inner-services
 
   auth-service:
-    build:
-      context: AuthService/.
+    image: registry.gitlab.com/kkirilll2006/devops-labs/auth:latest
     container_name: auth-service
     ports:
       - "8085"
@@ -80,8 +75,7 @@ services:
       - inner-services
 
   expense-service:
-    build:
-      context: ExpenseService/.
+    image: registry.gitlab.com/kkirilll2006/devops-labs/expense:latest
     container_name: expense-service
     ports:
       - "8083"
@@ -98,8 +92,7 @@ services:
       - inner-services
 
   api-gateway-service:
-    build:
-      context: ApiGatewayService/.
+    image: registry.gitlab.com/kkirilll2006/devops-labs/gateway:latest
     container_name: api-gateway-service
     ports:
       - "8080:8080"
