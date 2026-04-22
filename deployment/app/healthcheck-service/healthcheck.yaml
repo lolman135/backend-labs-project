@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthcheck-deployment
+  labels:
+    app: devops-labs
+spec:
+  selector:
+    matchLabels:
+      app: devops-labs
+      tier: healthcheck
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devops-labs
+        tier: healthcheck
+    spec:
+      containers:
+        - name: healthcheck-container
+          image: registry.gitlab.com/kkirilll2006/devops-labs/healthcheck:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+      imagePullSecrets:
+        - name: gitlab-registry-secret

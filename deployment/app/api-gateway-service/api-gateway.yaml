@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+  labels:
+    app: devops-labs
+spec:
+  selector:
+    matchLabels:
+      app: devops-labs
+      tier: api-gateway
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devops-labs
+        tier: api-gateway
+    spec:
+      containers:
+        - name: api-gateway-container
+          image: registry.gitlab.com/kkirilll2006/devops-labs/gateway:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: HEALTHCHECK_URL
+              value: "http://healthcheck-service:8080"
+            - name: CURRENCY_URL
+              value: "http://currency-service:8080"
+            - name: USER_URL
+              value: "http://user-service:8080"
+            - name: EXPENSE_URL
+              value: "http://expense-service:8080"
+            - name: AUTH_URL
+              value: "http://auth-service:8080"
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-secret
+                  key: jwt-secret-key
+      imagePullSecrets:
+        - name: gitlab-registry-secret

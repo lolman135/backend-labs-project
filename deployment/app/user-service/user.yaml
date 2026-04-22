@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+  labels:
+    app: devops-labs
+spec:
+  selector:
+    matchLabels:
+      app: devops-labs
+      tier: user
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devops-labs
+        tier: user
+    spec:
+      containers:
+        - name: user-container
+          image: registry.gitlab.com/kkirilll2006/devops-labs/user:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres:5432/user-db"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres-password
+            - name: CURRENCY_URL
+              value: "http://currency-service:8080"
+      imagePullSecrets:
+        - name: gitlab-registry-secret
