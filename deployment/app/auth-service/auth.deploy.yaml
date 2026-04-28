@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+  labels:
+    app: devops-labs
+spec:
+  selector:
+    matchLabels:
+      app: devops-labs
+      tier: auth
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devops-labs
+        tier: auth
+    spec:
+      containers:
+        - name: auth-container
+          image: registry.gitlab.com/kkirilll2006/devops-labs/auth:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "320Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "300m"
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres:5432/user-db"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres-password
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-secret
+                  key: jwt-secret-key
+      imagePullSecrets:
+        - name: gitlab-registry-secret

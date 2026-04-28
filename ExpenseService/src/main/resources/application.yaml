@@ -3,10 +3,13 @@ spring:
     name: ExpenseService
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/expense_db
-    username: postgres
-    password: postgres
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/expense_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 2
+      minimum-idle: 1
 
   flyway:
     enabled: true
@@ -23,10 +26,10 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: 8083
+  port: ${PORT:8083}
 
 user-service:
-  url: http://localhost:8082
+  url: ${USER_URL:http://localhost:8082}
 
 currency-service:
-  url: http://localhost:8084
+  url: ${CURRENCY_URL:http://localhost:8084}

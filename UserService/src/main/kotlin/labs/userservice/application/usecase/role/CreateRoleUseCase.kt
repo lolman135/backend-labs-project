@@ -5,10 +5,15 @@ import labs.userservice.application.usecase.UseCase
 import labs.userservice.common.toRoleFormat
 import labs.userservice.domain.Role
 import labs.userservice.domain.RoleRepository
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+
 import java.util.UUID
 
+@Service
 class CreateRoleUseCase(private val roleRepository: RoleRepository) : UseCase<UpsertRoleCommand, Role> {
 
+    @Transactional
     override fun execute(input: UpsertRoleCommand): Role {
         if (roleRepository.existsByName(input.name.toRoleFormat()))
             throw EntityAlreadyExistsException("This role already exists")

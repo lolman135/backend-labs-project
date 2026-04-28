@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: currency-deployment
+  labels:
+    app: devops-labs
+spec:
+  selector:
+    matchLabels:
+      app: devops-labs
+      tier: currency
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devops-labs
+        tier: currency
+    spec:
+      containers:
+        - name: currency-container
+          image: registry.gitlab.com/kkirilll2006/devops-labs/currency:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "320Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "300m"
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres:5432/currency-db"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres-password
+      imagePullSecrets:
+        - name: gitlab-registry-secret

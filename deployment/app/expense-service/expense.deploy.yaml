@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expense-deployment
+  labels:
+    app: devops-labs
+spec:
+  selector:
+    matchLabels:
+      app: devops-labs
+      tier: expense
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: devops-labs
+        tier: expense
+    spec:
+      containers:
+        - name: expense-container
+          image: registry.gitlab.com/kkirilll2006/devops-labs/expense:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "320Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "300m"
+          env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres:5432/expense-db"
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: postgres-password
+            - name: CURRENCY_URL
+              value: "http://currency-service:8080"
+            - name: USER_URL
+              value: "http://user-service:8080"
+      imagePullSecrets:
+        - name: gitlab-registry-secret
