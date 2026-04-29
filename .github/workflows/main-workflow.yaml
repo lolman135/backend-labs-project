@@ -42,7 +42,9 @@ jobs:
         run: ./gradlew :${{ matrix.service.name }}:clean :${{ matrix.service.name }}:test
 
   build-push:
-    needs: test
+    needs:
+      - setup
+      - test
     permissions:
       contents: read
       packages: write
