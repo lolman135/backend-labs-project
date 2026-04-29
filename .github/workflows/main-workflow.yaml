@@ -1,9 +1,5 @@
 name: Master CI/CD Pipeline
 on:
-  push:
-    branches:
-      - master
-      - dev
   workflow_dispatch:
 jobs:
 
@@ -73,7 +69,7 @@ jobs:
         uses: docker/login-action@v4
         with:
           registry: ghcr.io
-          username: ${{ github.actor}}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push docker image to GHCR
