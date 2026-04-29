@@ -104,6 +104,11 @@ jobs:
             echo "NAMESPACE=dev" >> $GITHUB_ENV
           fi
 
+      - name: Install DigitalOcean CTL
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_PAT }}
+
       - name: K8S Setup
         uses: azure/k8s-set-context@v5
         with:
