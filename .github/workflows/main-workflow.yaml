@@ -19,6 +19,7 @@ jobs:
           echo "matrix=${SERVICES}" >> $GITHUB_OUTPUT
 
   test:
+    needs: setup
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
