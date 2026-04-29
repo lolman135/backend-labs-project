@@ -119,6 +119,7 @@ jobs:
         run: |
           kubectl apply -f deployment/infrastructure/postgres/ -n ${{ env.NAMESPACE }}          
           kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.3/deploy/static/provider/do/deploy.yaml
+          sleep 60
           kubectl apply -f deployment/infrastructure/ingress/digital-ocean/nginx-ingress-lb.svc.yaml
           kubectl apply -f deployment/infrastructure/ingress/app.ingress.yaml -n ${{ env.NAMESPACE }}
 
