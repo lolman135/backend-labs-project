@@ -7,12 +7,23 @@ on:
   workflow_dispatch:
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v6
+      - id: set-matrix
+        run: |
+          SERVICES=$(ls -d *Service/ | sed 's/\///' | jq -R -s -c 'split("\n")[:-1]')
+          echo "matrix=${SERVICES}" >> $GITHUB_OUTPUT
+
   test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        service: [ ApiGatewayService, AuthService, CurrencyService, HealthcheckService, UserService, ExpenseService]
+        service: ${{ fromJson(needs.setup.outputs.matrix) }}
     steps:
       - name: Get Code
         uses: actions/checkout@v6
