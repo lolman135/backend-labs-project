@@ -84,3 +84,56 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/devops-labs/${{ matrix.service.image }}:latest
             ghcr.io/${{ github.repository_owner }}/devops-labs/${{ matrix.service.image }}:${{ github.run_number }}
+
+  deploy:
+    needs:
+      - setup
+      - build-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v6
+
+      - name: Set environment context
+        id: env-setup
+        run: |
+          if [[ ${{ github.ref }} == "refs/heads/master" ]]; then
+            echo "NAMESPACE=default" >> $GITHUB_ENV
+          else
+            echo "NAMESPACE=dev" >> $GITHUB_ENV
+          fi
+
+      - name: K8S Setup
+        uses: azure/k8s-set-context@v5
+        with:
+          method: 'kubeconfig'
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+
+      - name: Deploy Infrastructure
+        run: |
+          kubectl apply -f deployment/infrastructure/postgres/ -n ${{ env.NAMESPACE }}
+          kubectl apply -f deployment/infrastructure/ingress/digital-ocean/ -n ${{ env.NAMESPACE }}
+
+      - name: Deploy Application
+        run: |
+          SERVICES=(
+            "api-gateway-service:apigatewayservice"
+            "auth-service:authservice"
+            "currency-service:currencyservice"
+            "expense-service:expenseservice"
+            "healthcheck-service:healthcheckservice"
+            "user-service:userservice"
+          )
+          
+          for item in "${SERVICES[@]}"; do
+            DIR="${item%%:*}"
+            IMAGE_NAME="${item#*:}"
+          
+            export DEPLOY_IMAGE="ghcr.io/${{ github.repository_owner }}/devops-labs/$IMAGE_NAME:${{ github.run_number }}"
+            envsubst < deployment/app/$DIR/*.deploy.yaml | kubectl apply -n ${{ env.NAMESPACE }} -f -
+            kubectl apply -f deployment/app/$DIR/*.svc.yaml -n ${{ env.NAMESPACE }}
+          done
+
+      - name: Check Status
+        run: kubectl get pods -n ${{ env.NAMESPACE}}
