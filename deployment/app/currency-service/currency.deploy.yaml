@@ -43,5 +43,3 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: postgres-password
-      imagePullSecrets:
-        - name: gitlab-registry-secret

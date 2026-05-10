@@ -45,5 +45,3 @@ spec:
                   key: postgres-password
             - name: CURRENCY_URL
               value: "http://currency-service:8080"
-      imagePullSecrets:
-        - name: gitlab-registry-secret
