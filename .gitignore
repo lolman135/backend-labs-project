@@ -3,3 +3,5 @@
 /.idea
 /build
 *.zip
+deployment/secrets
+monitoring-setup.sh
